@@ -35,7 +35,7 @@ public class FindPiToNthDigit {
 		} catch (NumberFormatException e) {
 			System.out.print("argument is not a number\n");
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.print("no arguments given");
+			System.out.print("no arguments given\n");
 		} 
 	}
 	
