@@ -34,7 +34,8 @@ public class PrimeFactorization {
 		List<Integer> factorsList = new ArrayList<Integer>();
 		
 		
-		// dividing n by i and then adding n to the list optimizes
+		// dividing n by i in the for loop 
+		// and then adding n > 1 to the list optimizes
 		for (int i = 2; i <= n / i; i++) {
 			while (n % i == 0) {
 				factorsList.add(i);
@@ -42,6 +43,7 @@ public class PrimeFactorization {
 			}
 		}
 		
+		// no need to add factor if it is 1 now
 		if (n > 1) {
 			factorsList.add(n);
 		}
