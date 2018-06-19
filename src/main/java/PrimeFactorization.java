@@ -7,6 +7,20 @@ public class PrimeFactorization {
 	
 	public static void main(String[] args) {
 		
+		try {
+			
+			int n = Integer.parseInt(args[0]);
+			
+			for (int factor : listPrimeFactors(n)) {
+				System.out.print(factor + " ");
+			}
+			
+		} catch (NumberFormatException e) {
+			System.out.print("argument is not a number\n");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.print("no arguments given\n");
+		}
+		
 		
 
 
