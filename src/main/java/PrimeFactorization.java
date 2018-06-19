@@ -33,12 +33,19 @@ public class PrimeFactorization {
 		int n = number;
 		List<Integer> factorsList = new ArrayList<Integer>();
 		
-		for (int i = 2; i <= n; i++) {
+		
+		// dividing n by i and then adding n to the list optimizes
+		for (int i = 2; i <= n / i; i++) {
 			while (n % i == 0) {
 				factorsList.add(i);
 				n /= i;
 			}
 		}
+		
+		if (n > 1) {
+			factorsList.add(n);
+		}
+		
 		return factorsList;
 		
 	}
