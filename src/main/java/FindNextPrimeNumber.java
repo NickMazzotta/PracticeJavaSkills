@@ -7,76 +7,77 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-public class FindNextPrimeNumber implements ActionListener {
+public class FindNextPrimeNumber extends JPanel implements ActionListener  {
 	
-	// main
-	public static void main(String[] args) {
-		
-		FindNextPrimeNumber window = new FindNextPrimeNumber();
-	}
 	
 	private int currentPrime = 1;
 	private JButton nextPrimeButton;
+	private JLabel descriptionLabel;
 	private JLabel primeLabel;
 	
+	public static void createAndShowGui() {
+		
+		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setContentPane(new FindNextPrimeNumber());
+		
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
 	
 	
 	// constructor
 	public FindNextPrimeNumber() {
 		super();
 		
-		// create main frame
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		// set JPanel with padding as content pane of main frame
-		JPanel contentPanel = new JPanel();
 		Border padding = BorderFactory.createEmptyBorder(100, 100, 100, 100);
-		contentPanel.setBorder(padding);
-		frame.setContentPane(contentPanel);
-		
-		
+		this.setBorder(padding);
 		
 		// create box for UI elements
 		Box box = Box.createVerticalBox();
-		contentPanel.add(box, BorderLayout.CENTER);
+		
 		
 		// labels
-		JLabel descriptionLabel = new JLabel("Click the button to find the next number");
-		box.add(descriptionLabel, BorderLayout.CENTER);
-		
+		this.descriptionLabel = 
+				new JLabel("Click the button to find the next number");
 		this.primeLabel = 
 				new JLabel(Integer.toString(getCurrentPrime()));
-		box.add(this.primeLabel, BorderLayout.CENTER);
+		
 		
 		
 		// buttons
 		this.nextPrimeButton = new JButton("Next Prime");
 		this.nextPrimeButton.addActionListener(this);
+		
+		// set alignment of elements to center
+		this.descriptionLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		this.primeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		this.nextPrimeButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		
+		// add elements to box
+		box.add(descriptionLabel, BorderLayout.CENTER);
+		box.add(this.primeLabel, BorderLayout.CENTER);
 		box.add(this.nextPrimeButton, BorderLayout.CENTER);
 		
-		
-		
-		
-		// size the frame automatically
-		frame.pack();
-		
-		//center the frame on screen
-		frame.setLocationRelativeTo(null);
-				
-		// show the frame
-		frame.setVisible(true);
+		// add box to content panel
+		this.add(box, BorderLayout.CENTER);
 	}
 
 	
 	// found optimized algorithm at:
 	// https://stackoverflow.com/questions/47407251/optimal-way-to-find-next-prime-number-java
-	int findNextPrime() {
+	int calculateNextPrime() {
 		
 		int possiblePrime = getCurrentPrime() + 1;
 		int counter;
@@ -102,7 +103,7 @@ public class FindNextPrimeNumber implements ActionListener {
 		}
 	}
 	
-	void updateUI() {
+	void updateLabels() {
 		this.primeLabel.setText(Integer.toString(getCurrentPrime()));
 	}
 	
@@ -110,15 +111,12 @@ public class FindNextPrimeNumber implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		System.out.println("Action Event triggered");
-		
 		// find next prime and update value
 		if (e.getSource() == nextPrimeButton) {
-			System.out.println("nextPrimeButton pressed");
-			setCurrentPrime(findNextPrime());
+			setCurrentPrime(calculateNextPrime());
 		}
 		
-		updateUI();
+		updateLabels();
 		
 	}
 
@@ -129,6 +127,18 @@ public class FindNextPrimeNumber implements ActionListener {
 
 	public void setCurrentPrime(int currentPrime) {
 		this.currentPrime = currentPrime;
+	}
+	
+	
+	
+	// main
+	public static void main(String[] args) {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGui();
+			}
+		});
 	}
 	
 	
