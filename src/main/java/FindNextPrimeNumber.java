@@ -61,14 +61,15 @@ public class FindNextPrimeNumber extends JPanel implements ActionListener  {
 		this.nextPrimeButton.addActionListener(this);
 		
 		// set alignment of elements to center
+		// MUST SET ALL TO CENTER FOR CORRECT ALIGNTMENT
 		this.descriptionLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		this.primeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		this.nextPrimeButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
 		// add elements to box
-		box.add(descriptionLabel, BorderLayout.CENTER);
-		box.add(this.primeLabel, BorderLayout.CENTER);
-		box.add(this.nextPrimeButton, BorderLayout.CENTER);
+		box.add(descriptionLabel);
+		box.add(this.primeLabel);
+		box.add(this.nextPrimeButton);
 		
 		// add box to content panel
 		this.add(box, BorderLayout.CENTER);
