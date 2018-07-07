@@ -1,6 +1,9 @@
 package main.java;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
 public class FloorPlanPriceCalculator extends JPanel implements ActionListener {
@@ -48,7 +52,15 @@ public class FloorPlanPriceCalculator extends JPanel implements ActionListener {
 				BorderFactory.createEmptyBorder(100, 100, 100, 100);
 		this.setBorder(padding);
 		
+		
 		// initialize ui elements
+		
+		// create box layout
+		Box mainVerticalBox = Box.createVerticalBox();
+//		Box mainHorizontalBox = Box.createHorizontalBox();
+		JPanel inputPanel = new JPanel(new GridBagLayout());
+		Box labelsBox = Box.createVerticalBox();
+		Box textFieldsBox = Box.createVerticalBox();
 		
 		// labels
 		JLabel descriptionLabel = new JLabel("Enter the width "
@@ -65,25 +77,26 @@ public class FloorPlanPriceCalculator extends JPanel implements ActionListener {
 		
 		// buttons
 		JButton calculateButton = new JButton("Calculate");
+				
 		
-		
-		// configure placement of ui elements
-		
-		// create box layout
-		Box mainVerticalBox = Box.createVerticalBox();
-		Box mainHorizontalBox = Box.createHorizontalBox();
-		Box labelsBox = Box.createVerticalBox();
-		Box textFieldsBox = Box.createVerticalBox();
-		
+		// organize elements
 		
 		// add elements to boxes
 		mainVerticalBox.add(descriptionLabel);
-		mainVerticalBox.add(mainHorizontalBox);
+//		mainVerticalBox.add(mainHorizontalBox);
+		mainVerticalBox.add(inputPanel);
 		mainVerticalBox.add(resultLabel);
 		mainVerticalBox.add(calculateButton);
 		
-		mainHorizontalBox.add(labelsBox);
-		mainHorizontalBox.add(textFieldsBox);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		
+		
+//		mainHorizontalBox.add(labelsBox);
+//		mainHorizontalBox.add(textFieldsBox);
+		inputPanel.add(labelsBox);
+		inputPanel.add(textFieldsBox);
 		
 		labelsBox.add(widthLabel);
 		labelsBox.add(heightLabel);
@@ -96,10 +109,16 @@ public class FloorPlanPriceCalculator extends JPanel implements ActionListener {
 		
 		// align elements
 		descriptionLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-		mainHorizontalBox.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+//		mainHorizontalBox.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		inputPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		resultLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		calculateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
+		
+		// set size constraints on text fields
+//		widthInput.setMaximumSize(new Dimension(Double.valueOf(20), widthInput.getPreferredSize().getHeight()));
+//		heightInput.setMaximumSize(heightInput.getPreferredSize());
+//		costInput.setMaximumSize(costInput.getPreferredSize());
 		
 		// add box to content
 		this.add(mainVerticalBox, BorderLayout.CENTER);
